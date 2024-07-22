@@ -8,12 +8,9 @@ import com.vti.blogapp.mapper.PostMapper;
 import com.vti.blogapp.respository.PostRepository;
 import com.vti.blogapp.service.PostService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
 @Service
 @AllArgsConstructor
@@ -22,14 +19,9 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
     @Override
-    public List<PostDto> findAll() {
-        var posts = postRepository.findAll();
-        var dtos = new ArrayList<PostDto>();
-        for (Post post : posts) {
-            var dto = PostMapper.map(post);
-            dtos.add(dto);
-        }
-        return dtos;
+    public Page<PostDto> findAll(Pageable pageable) {
+        return postRepository.findAll(pageable)
+                .map(PostMapper::map);
     }
 
     @Override
@@ -68,7 +60,7 @@ public class PostServiceImpl implements PostService {
 //                    postRepository.save(post);
 //                });
         var optional = postRepository.findById(id);
-        if (optional.isEmpty()){
+        if (optional.isEmpty()) {
             return null;
         }
         var post = optional.get();

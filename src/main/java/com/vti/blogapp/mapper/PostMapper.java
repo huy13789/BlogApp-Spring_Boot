@@ -14,6 +14,12 @@ public class PostMapper {
         return post;
     }
 
+    public static void map(PostUpdateForm postUpdateForm, Post post) {
+        post.setTitle(postUpdateForm.getTitle());
+        post.setContent(postUpdateForm.getContent());
+        post.setDescription(postUpdateForm.getDescription());
+    }
+
     public static PostDto map(Post post) {
         var dto = new PostDto();
         dto.setId(post.getId());
@@ -25,10 +31,5 @@ public class PostMapper {
         return dto;
     }
 
-    public static void map(PostUpdateForm postUpdateForm, Post post) {
-        post.setTitle(postUpdateForm.getTitle());
-        post.setContent(postUpdateForm.getContent());
-        post.setDescription(postUpdateForm.getDescription());
-    }
 
 }
