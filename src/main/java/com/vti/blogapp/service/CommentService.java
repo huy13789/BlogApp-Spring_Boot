@@ -22,4 +22,6 @@ public interface CommentService {
 
     void deleteByID(Long id);
 
+    void deleteByEmail(String mail);
+
 }

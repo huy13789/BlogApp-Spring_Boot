@@ -28,8 +28,8 @@ public class CommentController {
     }
 
     @GetMapping("/api/v1/posts/{post_id}/comments")
-    public Page<CommentDTO> findByPostId(@PathVariable("post_id") Long id, Pageable pageable){
-        return commentService.findByPostId(id,pageable);
+    public Page<CommentDTO> findByPostId(@PathVariable("post_id") Long id, Pageable pageable) {
+        return commentService.findByPostId(id, pageable);
     }
 
     @PostMapping("/api/v1/posts/{post_id}/comments")
@@ -45,6 +45,11 @@ public class CommentController {
     @DeleteMapping("/api/v1/comments/{id}")
     public void delete(@PathVariable Long id) {
         commentService.deleteByID(id);
+    }
+
+    @DeleteMapping("/api/v1/comments/email/{email}")
+    public void deleteByEmail(@PathVariable("email") String mail) {
+        commentService.deleteByEmail(mail);
     }
 
 }

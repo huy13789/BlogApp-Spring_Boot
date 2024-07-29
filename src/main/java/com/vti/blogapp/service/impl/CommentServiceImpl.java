@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,5 +86,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void deleteByID(Long id) {
         commentRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByEmail(String mail) {
+        commentRepository.DeleteByEmail(mail);
     }
 }
